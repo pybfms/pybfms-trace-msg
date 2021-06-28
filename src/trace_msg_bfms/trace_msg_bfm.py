@@ -16,6 +16,7 @@ class TraceMsgBfm():
         
     @pybfms.export_task(pybfms.uint32_t)
     def _set_parameters(self, msg_sz):
+        print("TraceBFM: msg_sz=%d" % msg_sz)
         self.msg_sz = msg_sz
         
     @pybfms.export_task()
@@ -33,7 +34,7 @@ class TraceMsgBfm():
         self._clr_msg(idx)
         
         if len(msg) > self.msg_sz:
-            msg = msg[:-3]
+            msg = msg[0:self.msg_sz-3]
             msg += "..."
         
         for i,c in enumerate(msg.encode()):
